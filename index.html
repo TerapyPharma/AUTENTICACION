@@ -17,15 +17,13 @@
     }
 
     header {
-      background: url('https://i.imgur.com/xLBlMeN.jpg') no-repeat center center;
-      background-size: cover;
+      background-color: white;
       padding: 30px;
       border-radius: 10px;
       text-align: center;
       color: #0077b6;
       width: 100%;
       max-width: 800px;
-      backdrop-filter: brightness(1.2);
     }
 
     header img {
@@ -103,7 +101,7 @@
 
   <div class="verificador">
     <h2>Verificación de Autenticidad</h2>
-    <p>Ingrese el código de la caja y del producto a Verificar.</p>
+    <p>Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.</p>
 
     <input type="text" id="codigoCaja" placeholder="Código de producto">
     <input type="text" id="codigoProducto" placeholder="Código de etiqueta">
@@ -127,7 +125,7 @@
         resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por <strong>Elit Pharma</strong>.";
         resultado.className = "valido";
       } else {
-        resultado.innerHTML = "❌ Código inválido o producto falso.";
+        resultado.innerHTML = "❌ Código inválido o producto Falso.";
         resultado.className = "invalido";
       }
     }
