@@ -24,6 +24,7 @@
       color: #0077b6;
       width: 100%;
       max-width: 800px;
+      position: relative;
     }
 
     header img {
@@ -39,6 +40,20 @@
     header p {
       font-size: 1.1em;
       margin-top: 10px;
+    }
+
+    .language-switcher {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    .language-switcher button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5em;
+      margin-left: 10px;
     }
 
     .verificador {
@@ -104,13 +119,18 @@
 
   <header>
     <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma" />
-    <h1>Terapy Pharma</h1>
-    <p>Verificación de Productos Auténticos</p>
+    <h1 id="title">Terapy Pharma</h1>
+    <p id="subtitle">Verificación de Productos Auténticos</p>
+
+    <div class="language-switcher">
+      <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
+      <button onclick="setLanguage('en')" aria-label="English">🇺🇸</button>
+    </div>
   </header>
 
   <div class="verificador">
-    <h2>Verificación de Autenticidad</h2>
-    <p>Ingrese el código del producto a Verificar en letras Mayúsculas.</p>
+    <h2 id="verification-title">Verificación de Autenticidad</h2>
+    <p id="verification-instructions">Ingrese el código del producto a Verificar en letras Mayúsculas.</p>
 
     <input type="text" id="codigoCaja" placeholder="Código de Producto" />
     <input type="text" id="codigoProducto" placeholder="Código de Etiqueta" />
@@ -122,8 +142,39 @@
 
   <script>
     let codigosValidos = {};
+    let language = 'es';
 
-    // Cargar códigos desde Google Sheets CSV
+    const textos = {
+      es: {
+        subtitle: "Verificación de Productos Auténticos",
+        verificationTitle: "Verificación de Autenticidad",
+        verificationInstructions: "Ingrese el código del producto a Verificar en letras Mayúsculas.",
+        placeholderCaja: "Código de Producto",
+        placeholderProducto: "Código de Etiqueta",
+        success: "✅ Producto verificado: Auténtico y registrado por Elit Pharma.",
+        error: "❌ Código inválido o producto no registrado."
+      },
+      en: {
+        subtitle: "Authentic Products Verification",
+        verificationTitle: "Authenticity Verification",
+        verificationInstructions: "Enter the product code to verify in uppercase letters.",
+        placeholderCaja: "Product Code",
+        placeholderProducto: "Label Code",
+        success: "✅ Verified product: Authentic and registered by Elit Pharma.",
+        error: "❌ Invalid code or product not registered."
+      }
+    };
+
+    function setLanguage(lang) {
+      language = lang;
+      document.getElementById("subtitle").textContent = textos[lang].subtitle;
+      document.getElementById("verification-title").textContent = textos[lang].verificationTitle;
+      document.getElementById("verification-instructions").textContent = textos[lang].verificationInstructions;
+      document.getElementById("codigoCaja").placeholder = textos[lang].placeholderCaja;
+      document.getElementById("codigoProducto").placeholder = textos[lang].placeholderProducto;
+      document.getElementById("resultado").textContent = "";
+    }
+
     fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vS8P4YCUU5xT79kwcFXfJRd4TIM7qoZsPs3yhQSRLmvHIC6_5Vci71KV7V5oAVXFz3RAtVKWYyEu9Jk/pub?gid=0&single=true&output=csv")
       .then(response => response.text())
       .then(data => {
@@ -133,15 +184,9 @@
           const [caja, producto] = line.split(",");
           const cajaClean = caja.trim().toUpperCase();
           const productoClean = producto.trim().toUpperCase();
-
-          if (!codigosValidos[cajaClean]) {
-            codigosValidos[cajaClean] = [];
-          }
+          if (!codigosValidos[cajaClean]) codigosValidos[cajaClean] = [];
           codigosValidos[cajaClean].push(productoClean);
         });
-      })
-      .catch(error => {
-        console.error("Error al cargar códigos:", error);
       });
 
     function verificarProducto() {
@@ -150,13 +195,16 @@
       const resultado = document.getElementById("resultado");
 
       if (codigosValidos[caja] && codigosValidos[caja].includes(producto)) {
-        resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por Elit Pharma.";
+        resultado.innerHTML = textos[language].success;
         resultado.className = "valido";
       } else {
-        resultado.innerHTML = "❌ Código inválido o producto no registrado.";
+        resultado.innerHTML = textos[language].error;
         resultado.className = "invalido";
       }
     }
+
+    // idioma por defecto
+    setLanguage('es');
   </script>
 
 </body>
