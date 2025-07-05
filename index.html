@@ -93,17 +93,17 @@
 </head>
 <body>
   <header>
-  <img src="logo TerapyPharma.jpg" alt="Logo Terapy Pharma">
+  <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma">
   <h1>Terapy Pharma</h1>
   <p>Verificación oficial de productos auténticos</p>
 </header>
 
 <div class="verificador">
   <h2>Verificación de Autenticidad</h2>
-  <p>Ingrese el código de la caja y del producto individual.</p>
+  <p>Ingrese el código de caja y de producto A VERIFICAR.</p>
 
-  <input type="text" id="codigoCaja" placeholder="Código de producto">
-  <input type="text" id="codigoProducto" placeholder="Introduce el código que aparece en la etiqueta">
+  <input type="text" id="codigoCaja" placeholder="Código de producto en caja">
+  <input type="text" id="codigoProducto" placeholder="Código de etiqueta">
   
   <button onclick="verificarProducto()">Verificar</button>
 
@@ -124,7 +124,7 @@
       resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por <strong>Elit Pharma</strong>.";
       resultado.className = "valido";
     } else {
-      resultado.innerHTML = "❌ Código inválido o producto no registrado.";
+      resultado.innerHTML = "❌ Código inválido o producto falso.";
       resultado.className = "invalido";
     }
   }
