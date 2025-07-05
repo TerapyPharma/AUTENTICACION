@@ -17,14 +17,15 @@
     }
 
     header {
-      background: url('https://i.imgur.com/QCT7OPj.jpg') no-repeat center center;
+      background: url('https://i.imgur.com/xLBlMeN.jpg') no-repeat center center;
       background-size: cover;
       padding: 30px;
       border-radius: 10px;
       text-align: center;
-      color: #fff;
+      color: #0077b6;
       width: 100%;
       max-width: 800px;
+      backdrop-filter: brightness(1.2);
     }
 
     header img {
@@ -43,7 +44,7 @@
     }
 
     .verificador {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
@@ -95,17 +96,17 @@
 <body>
 
   <header>
-    <img src="logo TerapyPharma.jpg" alt="Logo Terapy Pharma">
+    <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma">
     <h1>Terapy Pharma</h1>
-    <p>Verificación oficial de productos auténticos</p>
+    <p>Verificación Oficial de Productos Auténticos</p>
   </header>
 
   <div class="verificador">
     <h2>Verificación de Autenticidad</h2>
-    <p>Ingrese el código de la caja y del producto individual.</p>
+    <p>Ingrese el código de la caja y del producto a Verificar.</p>
 
     <input type="text" id="codigoCaja" placeholder="Código de producto">
-    <input type="text" id="codigoProducto" placeholder="Introduce el código que aparece en la etiqueta">
+    <input type="text" id="codigoProducto" placeholder="Código de etiqueta">
     
     <button onclick="verificarProducto()">Verificar</button>
 
@@ -126,7 +127,7 @@
         resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por <strong>Elit Pharma</strong>.";
         resultado.className = "valido";
       } else {
-        resultado.innerHTML = "❌ Código inválido o producto no registrado.";
+        resultado.innerHTML = "❌ Código inválido o producto falso.";
         resultado.className = "invalido";
       }
     }
