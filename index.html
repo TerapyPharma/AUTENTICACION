@@ -40,6 +40,8 @@
     header p {
       font-size: 1.1em;
       margin-top: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
     }
 
     .language-switcher {
@@ -52,7 +54,7 @@
       background: none;
       border: none;
       cursor: pointer;
-       font-weight: bold;
+      font-weight: bold;
       font-size: 1.5em;
       margin-left: 10px;
       padding: 0;
@@ -63,7 +65,7 @@
     .language-switcher button:hover {
       transform: scale(1.2);
     }
-      
+
     .verificador {
       background: rgba(255, 255, 255, 0.95);
       padding: 30px;
@@ -75,6 +77,17 @@
       margin-top: 30px;
     }
 
+    .verificador h2 {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .verificador p {
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
     input {
       width: 100%;
       padding: 12px;
@@ -82,6 +95,7 @@
       margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 6px;
+      text-transform: uppercase;
     }
 
     button {
@@ -117,22 +131,22 @@
 <body>
 
   <header>
-    <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma">
-    <h1>Terapy Pharma</h1>
-    <p>Verificación Oficial de Productos Auténticos</p> 
+    <img src="logo TerapyPharma.jpg" alt="Logo Terapy Pharma" />
+    <h1 id="title">Terapy Pharma</h1>
+    <p id="subtitle">VERIFICACIÓN DE PRODUCTOS AUTÉNTICOS</p>
 
     <div class="language-switcher">
-      <button onclick="setLanguage('es')">ES</button>
-      <button onclick="setLanguage('en')">EN</button>
+      <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
+      <button onclick="setLanguage('en')" aria-label="English">🇺🇸</button>
     </div>
   </header>
 
   <div class="verificador">
-    <h2>Verificación de Autenticidad</h2>
-    <p>Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.</p>
+    <h2 id="verification-title">VERIFICACIÓN DE AUTENTICIDAD</h2>
+    <p id="verification-instructions">INGRESE EL CÓDIGO DEL PRODUCTO A VERIFICAR EN LETRAS MAYÚSCULAS.</p>
 
-    <input type="text" id="codigoCaja" placeholder="Código de producto">
-    <input type="text" id="codigoProducto" placeholder="Código de etiqueta">
+    <input type="text" id="codigoCaja" placeholder="CÓDIGO DE PRODUCTO" />
+    <input type="text" id="codigoProducto" placeholder="CÓDIGO DE ETIQUETA" />
     
     <button onclick="verificarProducto()">Verificar</button>
 
@@ -145,76 +159,14 @@
     const texts = {
       es: {
         title: "Terapy Pharma",
-        subtitle: "Verificación Oficial de Productos Auténticos",
-        verificationTitle: "Verificación de Autenticidad",
-        verificationInstructions: "Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.",
-        placeholderCaja: "Código de Producto",
-        placeholderProducto: "Código de etiqueta",
+        subtitle: "VERIFICACIÓN DE PRODUCTOS AUTÉNTICOS",
+        verificationTitle: "VERIFICACIÓN DE AUTENTICIDAD",
+        verificationInstructions: "INGRESE EL CÓDIGO DEL PRODUCTO A VERIFICAR EN LETRAS MAYÚSCULAS.",
+        placeholderCaja: "CÓDIGO DE PRODUCTO",
+        placeholderProducto: "CÓDIGO DE ETIQUETA",
         successMsg: "✅ Producto verificado: Auténtico y registrado por Elit Pharma.",
-        errorMsg: "❌ Código inválido o producto falso."
+        errorMsg: "❌ Código inválido o producto no registrado."
       },
       en: {
         title: "Terapy Pharma",
-        subtitle: "Official Verification of Authentic Products",
-        verificationTitle: "Authenticity Verification",
-        verificationInstructions: "Enter the box code and individual product code.",
-        placeholderCaja: "Box code",
-        placeholderProducto: "Enter the code on the label",
-        successMsg: "✅ Verified product: Authentic and registered by Elit Pharma.",
-        errorMsg: "❌ Invalid code or product not registered."
-      }
-    };
-    let codigosValidos = {};
-
-    // Cargar códigos desde Google Sheets CSV
-    fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vS8P4YCUU5xT79kwcFXfJRd4TIM7qoZsPs3yhQSRLmvHIC6_5Vci71KV7V5oAVXFz3RAtVKWYyEu9Jk/pub?gid=0&single=true&output=csv")
-      .then(response => response.text())
-      .then(data => {
-        const lines = data.trim().split("\n");
-        lines.shift(); // Quitar encabezado
-        lines.forEach(line => {
-          const [caja, producto] = line.split(",");
-          const cajaClean = caja.trim().toUpperCase();
-          const productoClean = producto.trim().toUpperCase();
-
-          if (!codigosValidos[cajaClean]) {
-            codigosValidos[cajaClean] = [];
-          }
-          codigosValidos[cajaClean].push(productoClean);
-        });
-      })
-      .catch(error => {
-        console.error("Error al cargar códigos:", error);
-      });
-    
-    function setLanguage(lang) {
-      language = lang;
-      document.getElementById("title").textContent = texts[lang].title;
-      document.getElementById("subtitle").textContent = texts[lang].subtitle;
-      document.getElementById("verification-title").textContent = texts[lang].verificationTitle;
-      document.getElementById("verification-instructions").textContent = texts[lang].verificationInstructions;
-      document.getElementById("codigoCaja").placeholder = texts[lang].placeholderCaja;
-      document.getElementById("codigoProducto").placeholder = texts[lang].placeholderProducto;
-      document.getElementById("resultado").textContent = "";
-    }
-
-    function verificarProducto() {
-      const caja = document.getElementById("codigoCaja").value.trim().toUpperCase();
-      const producto = document.getElementById("codigoProducto").value.trim().toUpperCase();
-      const resultado = document.getElementById("resultado");
-
-      if (codigosValidos[caja] && codigosValidos[caja].includes(producto)) {
-        resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por <strong>Elit Pharma</strong>.";
-        resultado.className = "valido";
-      } else {
-        resultado.innerHTML = "❌ Código inválido o producto Falso.";
-        resultado.className = "invalido";
-      }
-    }
-    
-   // Inicializar en español
-    setLanguage('es');
-  </script>
-
-</body>
-</html>
+        subtitle: "AUTHENTIC PRODUCTS VERIFICATION
