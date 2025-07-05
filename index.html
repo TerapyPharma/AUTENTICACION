@@ -3,43 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verificación de Autenticidad</title>
+  <title>TerapyPharma | Verificación</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f9f9f9;
-      padding: 40px;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #2c3e50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
     }
-    input, button {
-      padding: 10px;
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header img {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      font-size: 2.5em;
+      color: #0077b6;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.1em;
+      color: #555;
+    }
+    .verificador {
+      background: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
       font-size: 16px;
-      margin: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #005f8f;
     }
     #resultado {
       margin-top: 20px;
       font-weight: bold;
+      font-size: 1.1em;
+    }
+    .valido {
+      color: green;
+    }
+    .invalido {
+      color: #d62828;
+    }
+    footer {
+      margin-top: 60px;
+      font-size: 0.9em;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <h1>Verifica tu Producto</h1>
-  <p>Introduce tu código de autenticidad:</p>
-  <input type="text" id="codigoInput" placeholder="Ej. ABC123" />
-  <button onclick="verificarCodigo()">Verificar</button>
-  <div id="resultado"></div>
+  <header>
+    <img src="logo-terapypharma.png" alt="Logo TerapyPharma">
+    <h1>TerapyPharma</h1>
+    <p>Verificación de productos médicos para culturismo</p>
+  </header>
+
+  <div class="verificador">
+    <p>Introduce tu código de autenticidad:</p>
+    <input type="text" id="codigoInput" placeholder="Ej. TP-98X3-KL22" />
+    <button onclick="verificarCodigo()">Verificar</button>
+    <div id="resultado"></div>
+  </div>
+
+  <footer>
+    © 2025 TerapyPharma. Todos los derechos reservados.
+  </footer>
 
   <script>
-    const codigosValidos = ["ABC123", "XYZ789", "QWERTY456"];
+    const codigosValidos = ["TP-98X3-KL22", "TP-47LM-ZW90", "TP-0011-GYM9"];
+
     function verificarCodigo() {
       const input = document.getElementById('codigoInput').value.trim().toUpperCase();
       const resultado = document.getElementById('resultado');
+
+      if (!input) {
+        resultado.textContent = "Por favor ingresa un código.";
+        resultado.className = "invalido";
+        return;
+      }
+
       if (codigosValidos.includes(input)) {
-        resultado.innerHTML = "✅ ¡Código auténtico! Gracias por confiar.";
-        resultado.style.color = "green";
+        resultado.textContent = "✅ Código auténtico. Producto verificado por TerapyPharma.";
+        resultado.className = "valido";
       } else {
-        resultado.innerHTML = "❌ Código no válido.";
-        resultado.style.color = "red";
+        resultado.textContent = "❌ Código no válido. Este producto no está registrado.";
+        resultado.className = "invalido";
       }
     }
   </script>
