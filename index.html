@@ -109,17 +109,40 @@
   </header>
 
   <div class="verificador">
-    <p>Introduce tu código de autenticidad:</p>
-    <input type="text" id="codigoInput" placeholder="Ej. TP-98X3-KL22" />
-    <button onclick="verificarCodigo()">Verificar</button>
-    <div id="resultado"></div>
-  </div>
+  <h2>Verificación de Autenticidad</h2>
+  <p>Ingrese el código de la caja y del producto individual.</p>
 
-  <footer>
-    © 2025 TerapyPharma. Todos los derechos reservados.
-  </footer>
+  <input type="text" id="codigoCaja" placeholder="Código de caja (ej: TCYP)">
+  <input type="text" id="codigoProducto" placeholder="Código del producto (ej: T825C)">
+  
+  <button onclick="verificarProducto()">Verificar</button>
 
-  <script>
+  <div id="resultado"></div>
+</div>
+
+<script>
+  // Base de datos de códigos válidos
+  const codigosValidos = {
+    "TCYP": ["T825C"]
+    // Puedes agregar más códigos aquí después, ejemplo:
+    // "TCYP": ["T825C", "T826C", "T827C"],
+    // "PROT": ["P301A"]
+  };
+
+  function verificarProducto() {
+    const caja = document.getElementById("codigoCaja").value.trim().toUpperCase();
+    const producto = document.getElementById("codigoProducto").value.trim().toUpperCase();
+    const resultado = document.getElementById("resultado");
+
+    if (codigosValidos[caja] && codigosValidos[caja].includes(producto)) {
+      resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por TerapyPharma.";
+      resultado.className = "valido";
+    } else {
+      resultado.innerHTML = "❌ Código inválido o producto no registrado.";
+      resultado.className = "invalido";
+    }
+  }
+</script>
     const codigosValidos = ["TP-98X3-KL22", "TP-47LM-ZW90", "TP-0011-GYM9"];
 
     function verificarCodigo() {
