@@ -108,7 +108,7 @@
     <p>Garantía de Autenticidad para tus Productos</p>
   </header>
 
-  <div class="verificador">
+ <div class="verificador">
   <h2>Verificación de Autenticidad</h2>
   <p>Ingrese el código de la caja y del producto individual.</p>
 
@@ -124,7 +124,7 @@
   // Base de datos de códigos válidos
   const codigosValidos = {
     "TCYP": ["T825C"]
-    // Puedes agregar más códigos aquí después, ejemplo:
+    // Puedes agregar más códigos así:
     // "TCYP": ["T825C", "T826C", "T827C"],
     // "PROT": ["P301A"]
   };
@@ -135,7 +135,7 @@
     const resultado = document.getElementById("resultado");
 
     if (codigosValidos[caja] && codigosValidos[caja].includes(producto)) {
-      resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por TerapyPharma.";
+      resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por <strong>Elit Pharma</strong>.";
       resultado.className = "valido";
     } else {
       resultado.innerHTML = "❌ Código inválido o producto no registrado.";
@@ -143,7 +143,7 @@
     }
   }
 </script>
-    const codigosValidos = ["TP-98X3-KL22", "TP-47LM-ZW90", "TP-0011-GYM9"];
+   const codigosValidos = ["TP-98X3-KL22", "TP-47LM-ZW90", "TP-0011-GYM9"];
 
     function verificarCodigo() {
       const input = document.getElementById('codigoInput').value.trim().toUpperCase();
