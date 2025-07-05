@@ -24,6 +24,7 @@
       color: #0077b6;
       width: 100%;
       max-width: 800px;
+      position: relative;
     }
 
     header img {
@@ -41,6 +42,28 @@
       margin-top: 10px;
     }
 
+    .language-switcher {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    .language-switcher button {
+      background: none;
+      border: none;
+      cursor: pointer;
+       font-weight: bold;
+      font-size: 1.5em;
+      margin-left: 10px;
+      padding: 0;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .language-switcher button:hover {
+      transform: scale(1.2);
+    }
+      
     .verificador {
       background: rgba(255, 255, 255, 0.95);
       padding: 30px;
@@ -96,7 +119,12 @@
   <header>
     <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma">
     <h1>Terapy Pharma</h1>
-    <p>Verificación Oficial de Productos Auténticos</p>
+    <p>Verificación Oficial de Productos Auténticos</p> 
+
+    <div class="language-switcher">
+      <button onclick="setLanguage('es')">ES</button>
+      <button onclick="setLanguage('en')">EN</button>
+    </div>
   </header>
 
   <div class="verificador">
@@ -112,6 +140,30 @@
   </div>
 
   <script>
+    let language = 'es';
+
+    const texts = {
+      es: {
+        title: "Terapy Pharma",
+        subtitle: "Verificación Oficial de Productos Auténticos",
+        verificationTitle: "Verificación de Autenticidad",
+        verificationInstructions: "Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.",
+        placeholderCaja: "Código de Producto",
+        placeholderProducto: "Código de etiqueta",
+        successMsg: "✅ Producto verificado: Auténtico y registrado por Elit Pharma.",
+        errorMsg: "❌ Código inválido o producto falso."
+      },
+      en: {
+        title: "Terapy Pharma",
+        subtitle: "Official Verification of Authentic Products",
+        verificationTitle: "Authenticity Verification",
+        verificationInstructions: "Enter the box code and individual product code.",
+        placeholderCaja: "Box code",
+        placeholderProducto: "Enter the code on the label",
+        successMsg: "✅ Verified product: Authentic and registered by Elit Pharma.",
+        errorMsg: "❌ Invalid code or product not registered."
+      }
+    };
     let codigosValidos = {};
 
     // Cargar códigos desde Google Sheets CSV
@@ -134,6 +186,17 @@
       .catch(error => {
         console.error("Error al cargar códigos:", error);
       });
+    
+    function setLanguage(lang) {
+      language = lang;
+      document.getElementById("title").textContent = texts[lang].title;
+      document.getElementById("subtitle").textContent = texts[lang].subtitle;
+      document.getElementById("verification-title").textContent = texts[lang].verificationTitle;
+      document.getElementById("verification-instructions").textContent = texts[lang].verificationInstructions;
+      document.getElementById("codigoCaja").placeholder = texts[lang].placeholderCaja;
+      document.getElementById("codigoProducto").placeholder = texts[lang].placeholderProducto;
+      document.getElementById("resultado").textContent = "";
+    }
 
     function verificarProducto() {
       const caja = document.getElementById("codigoCaja").value.trim().toUpperCase();
@@ -148,6 +211,9 @@
         resultado.className = "invalido";
       }
     }
+    
+   // Inicializar en español
+    setLanguage('es');
   </script>
 
 </body>
