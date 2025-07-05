@@ -93,12 +93,12 @@
 </head>
 <body>
   <header>
-    <img src="logo.terapypharma.jpg" alt="Logo Teraoy Pharma">
-    <h1>TerapyPharma</h1>
-    <p>Verificación oficial de productos auténticos</p>
-  </header>
+  <img src="logo TerapyPharma.jpg" alt="Logo Terapy Pharma">
+  <h1>Terapy Pharma</h1>
+  <p>Verificación oficial de productos auténticos</p>
+</header>
 
-  <div class="verificador">
+<div class="verificador">
   <h2>Verificación de Autenticidad</h2>
   <p>Ingrese el código de la caja y del producto individual.</p>
 
@@ -110,23 +110,24 @@
   <div id="resultado"></div>
 </div>
 
-  <script>
-    const codigosValidos = {
-      "TCYP": ["T825C"]
-    };
+<script>
+  const codigosValidos = {
+    "TCYP": ["T825C"]
+  };
 
-    function verificarProducto() {
-      const caja = document.getElementById("codigoCaja").value.trim().toUpperCase();
-      const producto = document.getElementById("codigoProducto").value.trim().toUpperCase();
-      const resultado = document.getElementById("resultado");
+  function verificarProducto() {
+    const caja = document.getElementById("codigoCaja").value.trim().toUpperCase();
+    const producto = document.getElementById("codigoProducto").value.trim().toUpperCase();
+    const resultado = document.getElementById("resultado");
 
-      if (codigosValidos[caja] && codigosValidos[caja].includes(producto)) {
-        resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por <strong>Elit Pharma</strong>.";
-        resultado.className = "valido";
-      } else {
-        resultado.innerHTML = "❌ Código inválido o producto no registrado.";
-        resultado.className = "invalido";
-      
-  </script>
+    if (codigosValidos[caja] && codigosValidos[caja].includes(producto)) {
+      resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por <strong>Elit Pharma</strong>.";
+      resultado.className = "valido";
+    } else {
+      resultado.innerHTML = "❌ Código inválido o producto no registrado.";
+      resultado.className = "invalido";
+    }
+  }
+</script>
 </body>
 </html>
