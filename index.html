@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Terapy Pharma | Verificación</title>
   <style>
     body {
@@ -40,8 +40,7 @@
     header p {
       font-size: 1.1em;
       margin-top: 10px;
-      font-weight: bold;
-      text-transform: uppercase;
+      font-weight: normal;
     }
 
     .language-switcher {
@@ -78,14 +77,12 @@
     }
 
     .verificador h2 {
-      text-transform: uppercase;
       font-weight: bold;
     }
 
     .verificador p {
-      font-weight: bold;
       margin-bottom: 20px;
-      text-transform: uppercase;
+      font-weight: normal;
     }
 
     input {
@@ -131,42 +128,10 @@
 <body>
 
   <header>
-    <img src="logo TerapyPharma.jpg" alt="Logo Terapy Pharma" />
+    <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma" />
     <h1 id="title">Terapy Pharma</h1>
-    <p id="subtitle">VERIFICACIÓN DE PRODUCTOS AUTÉNTICOS</p>
+    <p id="subtitle">Verificación de Productos Auténticos</p>
 
     <div class="language-switcher">
       <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
-      <button onclick="setLanguage('en')" aria-label="English">🇺🇸</button>
-    </div>
-  </header>
-
-  <div class="verificador">
-    <h2 id="verification-title">VERIFICACIÓN DE AUTENTICIDAD</h2>
-    <p id="verification-instructions">INGRESE EL CÓDIGO DEL PRODUCTO A VERIFICAR EN LETRAS MAYÚSCULAS.</p>
-
-    <input type="text" id="codigoCaja" placeholder="CÓDIGO DE PRODUCTO" />
-    <input type="text" id="codigoProducto" placeholder="CÓDIGO DE ETIQUETA" />
-    
-    <button onclick="verificarProducto()">Verificar</button>
-
-    <div id="resultado"></div>
-  </div>
-
-  <script>
-    let language = 'es';
-
-    const texts = {
-      es: {
-        title: "Terapy Pharma",
-        subtitle: "VERIFICACIÓN DE PRODUCTOS AUTÉNTICOS",
-        verificationTitle: "VERIFICACIÓN DE AUTENTICIDAD",
-        verificationInstructions: "INGRESE EL CÓDIGO DEL PRODUCTO A VERIFICAR EN LETRAS MAYÚSCULAS.",
-        placeholderCaja: "CÓDIGO DE PRODUCTO",
-        placeholderProducto: "CÓDIGO DE ETIQUETA",
-        successMsg: "✅ Producto verificado: Auténtico y registrado por Elit Pharma.",
-        errorMsg: "❌ Código inválido o producto no registrado."
-      },
-      en: {
-        title: "Terapy Pharma",
-        subtitle: "AUTHENTIC PRODUCTS VERIFICATION
+      <button onclick="setL
