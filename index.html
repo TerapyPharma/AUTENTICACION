@@ -140,25 +140,6 @@
     }
   }
 </script>
-
-   const codigosValidos = ["TP-98X3-KL22", "TP-47LM-ZW90", "TP-0011-GYM9"];
-
-    function verificarCodigo() {
-      const input = document.getElementById('codigoInput').value.trim().toUpperCase();
-      const resultado = document.getElementById('resultado');
-
-      if (!input) {
-        resultado.textContent = "Por favor ingresa un código.";
-        resultado.className = "invalido";
-        return;
-      }
-
-      if (codigosValidos.includes(input)) {
-        resultado.textContent = "✅ Código auténtico. Producto verificado por TerapyPharma.";
-        resultado.className = "valido";
-      } else {
-        resultado.textContent = "❌ Código no válido. Este producto no está registrado.";
-        resultado.className = "invalido";
       }
     }
   </script>
