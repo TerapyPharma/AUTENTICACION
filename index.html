@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Terapy Pharma | Verificación</title>
   <style>
     body {
@@ -24,7 +24,6 @@
       color: #0077b6;
       width: 100%;
       max-width: 800px;
-      position: relative;
     }
 
     header img {
@@ -42,20 +41,6 @@
       margin-top: 10px;
     }
 
-    .language-switcher {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-    }
-
-    .language-switcher button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.5em;
-      margin-left: 10px;
-    }
-
     .verificador {
       background: rgba(255, 255, 255, 0.95);
       padding: 30px;
@@ -67,14 +52,6 @@
       margin-top: 30px;
     }
 
-    .verificador h2 {
-      font-weight: bold;
-    }
-
-    .verificador p {
-      margin-bottom: 20px;
-    }
-
     input {
       width: 100%;
       padding: 12px;
@@ -82,7 +59,6 @@
       margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      text-transform: uppercase;
     }
 
     button {
@@ -118,22 +94,17 @@
 <body>
 
   <header>
-    <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma" />
-    <h1 id="title">Terapy Pharma</h1>
-    <p id="subtitle">Verificación de Productos Auténticos</p>
-
-    <div class="language-switcher">
-      <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
-      <button onclick="setLanguage('en')" aria-label="English">🇺🇸</button>
-    </div>
+    <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma">
+    <h1>Terapy Pharma y Pharma Elit</h1>
+    <p>Verificación Oficial de Productos Auténticos</p>
   </header>
 
   <div class="verificador">
-    <h2 id="verification-title">Verificación de Autenticidad</h2>
-    <p id="verification-instructions">Ingrese el código del producto a Verificar en letras Mayúsculas.</p>
+    <h2>Verificación de Autenticidad</h2>
+    <p>Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.</p>
 
-    <input type="text" id="codigoCaja" placeholder="Código de Producto" />
-    <input type="text" id="codigoProducto" placeholder="Código de Etiqueta" />
+    <input type="text" id="codigoCaja" placeholder="Código de producto">
+    <input type="text" id="codigoProducto" placeholder="Código de etiqueta">
     
     <button onclick="verificarProducto()">Verificar</button>
 
@@ -141,53 +112,9 @@
   </div>
 
   <script>
-    let codigosValidos = {};
-    let language = 'es';
-
-    const textos = {
-      es: {
-        subtitle: "Verificación de Productos Auténticos",
-        verificationTitle: "Verificación de Autenticidad",
-        verificationInstructions: "Ingrese el código del producto a Verificar en letras Mayúsculas.",
-        placeholderCaja: "Código de Producto",
-        placeholderProducto: "Código de Etiqueta",
-        success: "✅ Producto verificado: Auténtico y registrado por Elit Pharma.",
-        error: "❌ Código inválido o producto no registrado."
-      },
-      en: {
-        subtitle: "Authentic Products Verification",
-        verificationTitle: "Authenticity Verification",
-        verificationInstructions: "Enter the product code to verify in uppercase letters.",
-        placeholderCaja: "Product Code",
-        placeholderProducto: "Label Code",
-        success: "✅ Verified product: Authentic and registered by Elit Pharma.",
-        error: "❌ Invalid code or product not registered."
-      }
+    const codigosValidos = {
+      "WINSTROL 10ML": ["C8YAA"]
     };
-
-    function setLanguage(lang) {
-      language = lang;
-      document.getElementById("subtitle").textContent = textos[lang].subtitle;
-      document.getElementById("verification-title").textContent = textos[lang].verificationTitle;
-      document.getElementById("verification-instructions").textContent = textos[lang].verificationInstructions;
-      document.getElementById("codigoCaja").placeholder = textos[lang].placeholderCaja;
-      document.getElementById("codigoProducto").placeholder = textos[lang].placeholderProducto;
-      document.getElementById("resultado").textContent = "";
-    }
-
-    fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vS8P4YCUU5xT79kwcFXfJRd4TIM7qoZsPs3yhQSRLmvHIC6_5Vci71KV7V5oAVXFz3RAtVKWYyEu9Jk/pub?gid=0&single=true&output=csv")
-      .then(response => response.text())
-      .then(data => {
-        const lines = data.trim().split("\n");
-        lines.shift(); // Quitar encabezado
-        lines.forEach(line => {
-          const [caja, producto] = line.split(",");
-          const cajaClean = caja.trim().toUpperCase();
-          const productoClean = producto.trim().toUpperCase();
-          if (!codigosValidos[cajaClean]) codigosValidos[cajaClean] = [];
-          codigosValidos[cajaClean].push(productoClean);
-        });
-      });
 
     function verificarProducto() {
       const caja = document.getElementById("codigoCaja").value.trim().toUpperCase();
@@ -195,16 +122,13 @@
       const resultado = document.getElementById("resultado");
 
       if (codigosValidos[caja] && codigosValidos[caja].includes(producto)) {
-        resultado.innerHTML = textos[language].success;
+        resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por <strong>Elit Pharma</strong>.";
         resultado.className = "valido";
       } else {
-        resultado.innerHTML = textos[language].error;
+        resultado.innerHTML = "❌ Código inválido o producto Falso.";
         resultado.className = "invalido";
       }
     }
-
-    // idioma por defecto
-    setLanguage('es');
   </script>
 
 </body>
