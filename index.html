@@ -24,6 +24,7 @@
       color: #0077b6;
       width: 100%;
       max-width: 800px;
+      position: relative;
     }
 
     header img {
@@ -39,6 +40,20 @@
     header p {
       font-size: 1.1em;
       margin-top: 10px;
+    }
+
+    .language-switcher {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    .language-switcher button {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      margin-left: 10px;
     }
 
     .verificador {
@@ -96,25 +111,68 @@
   <header>
     <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma">
     <h1>Terapy Pharma y Pharma Elit</h1>
-    <p>Verificación Oficial de Productos Auténticos</p>
+    <p id="subtitulo">Verificación Oficial de Productos Auténticos</p>
+
+    <!-- Banderas -->
+    <div class="language-switcher">
+      <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
+      <button onclick="setLanguage('en')" aria-label="English">🇺🇸</button>
+    </div>
   </header>
 
   <div class="verificador">
-    <h2>Verificación de Autenticidad</h2>
-    <p>Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.</p>
+    <h2 id="tituloVerificacion">Verificación de Autenticidad</h2>
+    <p id="instrucciones">Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.</p>
 
     <input type="text" id="codigoCaja" placeholder="Nombre de producto">
     <input type="text" id="codigoProducto" placeholder="Código de etiqueta">
     
-    <button onclick="verificarProducto()">Verificar</button>
+    <button id="botonVerificar" onclick="verificarProducto()">Verificar</button>
 
     <div id="resultado"></div>
   </div>
 
   <script>
+    let language = "es";
+
+    const textos = {
+      es: {
+        subtitulo: "Verificación Oficial de Productos Auténticos",
+        titulo: "Verificación de Autenticidad",
+        instrucciones: "Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.",
+        placeholderCaja: "Nombre de producto",
+        placeholderProducto: "Código de etiqueta",
+        boton: "Verificar",
+        exito: "✅ Producto verificado: Auténtico y registrado por <strong>Elit Pharma</strong>.",
+        error: "❌ Código inválido o producto Falso."
+      },
+      en: {
+        subtitulo: "Official Authentic Product Verification",
+        titulo: "Authenticity Verification",
+        instrucciones: "Enter the box and product code in uppercase letters.",
+        placeholderCaja: "Product name",
+        placeholderProducto: "Label code",
+        boton: "Verify",
+        exito: "✅ Verified product: Authentic and registered by <strong>Elit Pharma</strong>.",
+        error: "❌ Invalid code or counterfeit product."
+      }
+    };
+
     const codigosValidos = {
       "WINSTROL 10ML": ["C8YAA"]
     };
+
+    function setLanguage(lang) {
+      language = lang;
+      const t = textos[lang];
+      document.getElementById("subtitulo").textContent = t.subtitulo;
+      document.getElementById("tituloVerificacion").textContent = t.titulo;
+      document.getElementById("instrucciones").textContent = t.instrucciones;
+      document.getElementById("codigoCaja").placeholder = t.placeholderCaja;
+      document.getElementById("codigoProducto").placeholder = t.placeholderProducto;
+      document.getElementById("botonVerificar").textContent = t.boton;
+      document.getElementById("resultado").textContent = "";
+    }
 
     function verificarProducto() {
       const caja = document.getElementById("codigoCaja").value.trim().toUpperCase();
@@ -122,13 +180,16 @@
       const resultado = document.getElementById("resultado");
 
       if (codigosValidos[caja] && codigosValidos[caja].includes(producto)) {
-        resultado.innerHTML = "✅ Producto verificado: Auténtico y registrado por <strong>Elit Pharma</strong>.";
+        resultado.innerHTML = textos[language].exito;
         resultado.className = "valido";
       } else {
-        resultado.innerHTML = "❌ Código inválido o producto Falso.";
+        resultado.innerHTML = textos[language].error;
         resultado.className = "invalido";
       }
     }
+
+    // Idioma por defecto
+    setLanguage("es");
   </script>
 
 </body>
