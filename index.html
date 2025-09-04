@@ -115,22 +115,80 @@
 
     footer {
       margin-top: 40px;
-      font-size: 0.9em;
       color: #666;
+      font-size: 0.9em;
       text-align: center;
+      width: 100%;
+      max-width: 800px;
+      padding-bottom: 20px;
+    }
+
+    /* Responsive para pantallas pequeñas */
+    @media (max-width: 480px) {
+      body {
+        padding: 20px 10px;
+      }
+
+      header {
+        padding: 20px 15px;
+      }
+
+      header img {
+        width: 70px;
+      }
+
+      header h1 {
+        font-size: 1.8em;
+      }
+
+      header p {
+        font-size: 1em;
+      }
+
+      .language-switcher {
+        top: 10px;
+        right: 10px;
+      }
+
+      .language-switcher button {
+        font-size: 20px;
+        margin-left: 6px;
+      }
+
+      .verificador {
+        padding: 20px;
+        max-width: 100%;
+      }
+
+      input {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 10px 16px;
+      }
+
+      #resultado {
+        font-size: 1em;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma">
+    <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma" />
     <h1>Terapy Pharma / Elit Pharma</h1>
     <p id="subtitulo">Verificación Oficial de Productos Auténticos</p>
 
+    <!-- Banderas -->
     <div class="language-switcher">
       <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
       <button onclick="setLanguage('en')" aria-label="English">🇺🇸</button>
+      <button onclick="setLanguage('de')" aria-label="Deutsch">🇩🇪</button>
+      <button onclick="setLanguage('pt')" aria-label="Português">🇵🇹</button>
     </div>
   </header>
 
@@ -138,17 +196,15 @@
     <h2 id="tituloVerificacion">Verificación de Autenticidad</h2>
     <p id="instrucciones">Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.</p>
 
-    <input type="text" id="codigoCaja" placeholder="Nombre de producto">
-    <input type="text" id="codigoProducto" placeholder="Código de etiqueta">
+    <input type="text" id="codigoCaja" placeholder="Nombre de producto" />
+    <input type="text" id="codigoProducto" placeholder="Código de etiqueta" />
     
     <button id="botonVerificar" onclick="verificarProducto()">Verificar</button>
 
     <div id="resultado"></div>
   </div>
 
-  <footer id="pie">
-    &copy; 2025 Terapy Pharma. Todos los derechos reservados.
-  </footer>
+  <footer id="pie">&copy; 2025 Terapy Pharma. Todos los derechos reservados.</footer>
 
   <script>
     let language = "es";
@@ -175,6 +231,28 @@
         exito: "✅ Valid Product: Authentic, Verified and registered by <strong>Elit Pharma</strong>.",
         error: "❌ WARNING! Invalid code or product is fake and tampered with.",
         pie: "&copy; 2025 Terapy Pharma. All rights reserved."
+      },
+      de: {
+        subtitulo: "Offizielle Authentizitätsprüfung von Produkten",
+        titulo: "Authentizitätsprüfung",
+        instrucciones: "Geben Sie den Karton- und Produktcode in Großbuchstaben ein.",
+        placeholderCaja: "Produktname",
+        placeholderProducto: "Etikettencode",
+        boton: "Überprüfen",
+        exito: "✅ Gültiges Produkt: Authentisch, überprüft und registriert von <strong>Elit Pharma</strong>.",
+        error: "❌ ACHTUNG! Ungültiger Code oder Produkt ist gefälscht und manipuliert.",
+        pie: "&copy; 2025 Terapy Pharma. Alle Rechte vorbehalten."
+      },
+      pt: {
+        subtitulo: "Verificação Oficial de Produtos Autênticos",
+        titulo: "Verificação de Autenticidade",
+        instrucciones: "Digite o código da caixa e do produto em letras maiúsculas.",
+        placeholderCaja: "Nome do produto",
+        placeholderProducto: "Código da etiqueta",
+        boton: "Verificar",
+        exito: "✅ Produto válido: Autêntico, verificado e registrado pela <strong>Elit Pharma</strong>.",
+        error: "❌ ATENÇÃO! Código inválido ou produto falsificado e adulterado.",
+        pie: "&copy; 2025 Terapy Pharma. Todos os direitos reservados."
       }
     };
 
@@ -212,6 +290,7 @@
       }
     }
 
+    // Idioma por defecto
     setLanguage("es");
   </script>
 
