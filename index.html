@@ -33,3 +33,187 @@
     }
 
     header h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
+
+    .language-switcher {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    .language-switcher button {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .verificador {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005f8f;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .valido {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #c3e6cb;
+    }
+
+    .invalido {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #f5c6cb;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma">
+    <h1>Terapy Pharma / Elit Pharma</h1>
+    <p id="subtitulo">Verificación Oficial de Productos Auténticos</p>
+
+    <div class="language-switcher">
+      <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
+      <button onclick="setLanguage('en')" aria-label="English">🇺🇸</button>
+    </div>
+  </header>
+
+  <div class="verificador">
+    <h2 id="tituloVerificacion">Verificación de Autenticidad</h2>
+    <p id="instrucciones">Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.</p>
+
+    <input type="text" id="codigoCaja" placeholder="Nombre de producto">
+    <input type="text" id="codigoProducto" placeholder="Código de etiqueta">
+    
+    <button id="botonVerificar" onclick="verificarProducto()">Verificar</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <footer id="pie">
+    &copy; 2025 Terapy Pharma. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    let language = "es";
+
+    const textos = {
+      es: {
+        subtitulo: "Verificación Oficial de Productos Auténticos",
+        titulo: "Verificación de Autenticidad",
+        instrucciones: "Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.",
+        placeholderCaja: "Nombre de producto",
+        placeholderProducto: "Código de etiqueta",
+        boton: "Verificar",
+        exito: "✅ Producto Válido: Auténtico, Verificado y registrado por <strong>Elit Pharma</strong>.",
+        error: "❌ ¡ATENCIÓN! Código inválido o producto manipulado.",
+        pie: "&copy; 2025 Terapy Pharma. Todos los derechos reservados."
+      },
+      en: {
+        subtitulo: "Official Authentic Product Verification",
+        titulo: "Authenticity Verification",
+        instrucciones: "Enter the box and product code in uppercase letters.",
+        placeholderCaja: "Product name",
+        placeholderProducto: "Label code",
+        boton: "Verify",
+        exito: "✅ Valid Product: Authentic, Verified and registered by <strong>Elit Pharma</strong>.",
+        error: "❌ WARNING! Invalid code or product is fake and tampered with.",
+        pie: "&copy; 2025 Terapy Pharma. All rights reserved."
+      }
+    };
+
+    const codigosValidos = {
+      "WINSTROL 10ML": ["C8YAA"],
+      "TESTOSTERONA 250MG": ["TST250A", "TST250B"],
+      "TREMBOLONA 100MG": ["TRMB100X"],
+      "PRIMOBOLAN 10ML": ["F1ECT"]
+    };
+
+    function setLanguage(lang) {
+      language = lang;
+      const t = textos[lang];
+      document.getElementById("subtitulo").textContent = t.subtitulo;
+      document.getElementById("tituloVerificacion").textContent = t.titulo;
+      document.getElementById("instrucciones").textContent = t.instrucciones;
+      document.getElementById("codigoCaja").placeholder = t.placeholderCaja;
+      document.getElementById("codigoProducto").placeholder = t.placeholderProducto;
+      document.getElementById("botonVerificar").textContent = t.boton;
+      document.getElementById("resultado").textContent = "";
+      document.getElementById("pie").innerHTML = t.pie;
+    }
+
+    function verificarProducto() {
+      const caja = document.getElementById("codigoCaja").value.trim().toUpperCase();
+      const producto = document.getElementById("codigoProducto").value.trim().toUpperCase();
+      const resultado = document.getElementById("resultado");
+
+      if (codigosValidos[caja] && codigosValidos[caja].includes(producto)) {
+        resultado.innerHTML = textos[language].exito;
+        resultado.className = "valido";
+      } else {
+        resultado.innerHTML = textos[language].error;
+        resultado.className = "invalido";
+      }
+    }
+
+    setLanguage("es");
+  </script>
+
+</body>
+</html>
