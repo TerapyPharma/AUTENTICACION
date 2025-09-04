@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Terapy Pharma | Verificación</title>
 
-  <!-- Fuente moderna -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Fuente Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
 
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
       background-color: #f2f7fc;
       color: #2c3e50;
       display: flex;
@@ -24,47 +24,55 @@
       background-color: white;
       padding: 30px;
       border-radius: 10px;
-      text-align: center;
       color: #0077b6;
       width: 100%;
       max-width: 800px;
-      position: relative;
+      box-sizing: border-box;
     }
 
-    header img {
+    /* Encabezado superior: logo + banderas */
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
       width: 100px;
       margin-bottom: 10px;
     }
 
-    header h1 {
-      font-size: 2.5em;
-      margin: 0;
-    }
-
-    header p {
-      font-size: 1.1em;
-      margin-top: 10px;
-    }
-
     .language-switcher {
-      position: absolute;
-      top: 20px;
-      right: 20px;
       display: flex;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .language-switcher button {
       background: none;
       border: none;
-      font-size: 22px;
+      font-size: 28px;
       cursor: pointer;
-      transition: transform 0.2s ease, filter 0.2s ease;
+      transition: transform 0.2s ease;
+      padding: 0;
+      line-height: 1;
     }
 
     .language-switcher button:hover {
-      transform: scale(1.2);
-      filter: brightness(1.2);
+      transform: scale(1.3);
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+
+    header p {
+      font-size: 1.1em;
+      margin: 0;
+      text-align: center;
     }
 
     .verificador {
@@ -76,6 +84,7 @@
       max-width: 400px;
       text-align: center;
       margin-top: 30px;
+      box-sizing: border-box;
     }
 
     input {
@@ -85,6 +94,7 @@
       margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 6px;
+      box-sizing: border-box;
     }
 
     button {
@@ -124,26 +134,49 @@
       border: 1px solid #f5c6cb;
     }
 
-    footer {
+    footer#pie {
       margin-top: 40px;
-      font-size: 0.9em;
-      color: #555;
       text-align: center;
+      color: #555;
+      font-size: 0.9em;
+      width: 100%;
+      max-width: 800px;
+      box-sizing: border-box;
     }
 
-    /* Responsive */
-    @media (max-width: 600px) {
+    /* Responsive para pantallas pequeñas */
+    @media (max-width: 480px) {
+      body {
+        padding: 20px 10px;
+      }
+
+      header {
+        padding: 20px 15px;
+      }
+
+      .header-top {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+
       .language-switcher {
-        top: 10px;
-        right: 10px;
+        justify-content: center;
+        gap: 15px;
       }
 
       header h1 {
-        font-size: 1.8em;
+        font-size: 2em;
+      }
+
+      input, button {
+        font-size: 14px;
+        padding: 10px;
       }
 
       .verificador {
         padding: 20px;
+        max-width: 100%;
       }
     }
   </style>
@@ -151,30 +184,34 @@
 <body>
 
   <header>
-    <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma">
+    <div class="header-top">
+      <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma" class="logo" />
+      <div class="language-switcher">
+        <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
+        <button onclick="setLanguage('en')" aria-label="English">🇺🇸</button>
+        <button onclick="setLanguage('br')" aria-label="Português">🇧🇷</button>
+        <button onclick="setLanguage('de')" aria-label="Deutsch">🇩🇪</button>
+      </div>
+    </div>
     <h1>Terapy Pharma / Elit Pharma</h1>
     <p id="subtitulo">Verificación Oficial de Productos Auténticos</p>
-
-    <!-- Banderas ordenadas por uso -->
-    <div class="language-switcher">
-      <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
-      <button onclick="setLanguage('en')" aria-label="English">🇺🇸</button>
-      <button onclick="setLanguage('pt')" aria-label="Português">🇧🇷</button>
-      <button onclick="setLanguage('de')" aria-label="Deutsch">🇩🇪</button>
-    </div>
   </header>
 
   <div class="verificador">
     <h2 id="tituloVerificacion">Verificación de Autenticidad</h2>
     <p id="instrucciones">Ingrese el código de la caja y del producto a Verificar en letras Mayúsculas.</p>
 
-    <input type="text" id="codigoCaja" placeholder="Nombre de producto">
-    <input type="text" id="codigoProducto" placeholder="Código de etiqueta">
+    <input type="text" id="codigoCaja" placeholder="Nombre de producto" />
+    <input type="text" id="codigoProducto" placeholder="Código de etiqueta" />
     
     <button id="botonVerificar" onclick="verificarProducto()">Verificar</button>
 
     <div id="resultado"></div>
   </div>
+
+  <footer id="pie">
+    &copy; 2025 Terapy Pharma. Todos los derechos reservados.
+  </footer>
 
   <script>
     let language = "es";
@@ -189,7 +226,7 @@
         boton: "Verificar",
         exito: "✅ Producto Válido: Auténtico, Verificado y registrado por <strong>Elit Pharma</strong>.",
         error: "❌ ¡ATENCIÓN! Código inválido o producto manipulado.",
-        pie: "&copy; 2025 Terapy Pharma. Todos los derechos reservados."
+        pie: "© 2025 Terapy Pharma. Todos los derechos reservados."
       },
       en: {
         subtitulo: "Official Authentic Product Verification",
@@ -200,29 +237,29 @@
         boton: "Verify",
         exito: "✅ Valid Product: Authentic, Verified and registered by <strong>Elit Pharma</strong>.",
         error: "❌ WARNING! Invalid code or product is fake and tampered with.",
-        pie: "&copy; 2025 Terapy Pharma. All rights reserved."
+        pie: "© 2025 Terapy Pharma. All rights reserved."
       },
-      pt: {
+      br: {
         subtitulo: "Verificação Oficial de Produtos Autênticos",
         titulo: "Verificação de Autenticidade",
-        instrucciones: "Digite o nome e o código do produto em letras maiúsculas.",
+        instrucciones: "Digite o código da caixa e do produto em letras maiúsculas.",
         placeholderCaja: "Nome do produto",
         placeholderProducto: "Código da etiqueta",
         boton: "Verificar",
         exito: "✅ Produto Válido: Autêntico, Verificado e registrado pela <strong>Elit Pharma</strong>.",
-        error: "❌ ATENÇÃO! Código inválido ou produto falsificado.",
-        pie: "&copy; 2025 Terapy Pharma. Todos os direitos reservados."
+        error: "❌ ATENÇÃO! Código inválido ou produto manipulado.",
+        pie: "© 2025 Terapy Pharma. Todos os direitos reservados."
       },
       de: {
-        subtitulo: "Offizielle Überprüfung authentischer Produkte",
+        subtitulo: "Offizielle Verifizierung authentischer Produkte",
         titulo: "Authentizitätsprüfung",
-        instrucciones: "Geben Sie den Produktnamen und Code in Großbuchstaben ein.",
+        instrucciones: "Geben Sie den Kasten- und Produktcode in Großbuchstaben ein.",
         placeholderCaja: "Produktname",
-        placeholderProducto: "Etikettcode",
-        boton: "Überprüfen",
-        exito: "✅ Gültiges Produkt: Authentisch, überprüft und registriert von <strong>Elit Pharma</strong>.",
-        error: "❌ ACHTUNG! Ungültiger Code oder manipuliertes Produkt.",
-        pie: "&copy; 2025 Terapy Pharma. Alle Rechte vorbehalten."
+        placeholderProducto: "Etikettencode",
+        boton: "Prüfen",
+        exito: "✅ Gültiges Produkt: Authentisch, verifiziert und registriert von <strong>Elit Pharma</strong>.",
+        error: "❌ ACHTUNG! Ungültiger Code oder Produkt ist gefälscht und manipuliert.",
+        pie: "© 2025 Terapy Pharma. Alle Rechte vorbehalten."
       }
     };
 
@@ -243,7 +280,7 @@
       document.getElementById("codigoProducto").placeholder = t.placeholderProducto;
       document.getElementById("botonVerificar").textContent = t.boton;
       document.getElementById("resultado").textContent = "";
-      document.getElementById("pie").innerHTML = t.pie;
+      document.getElementById("pie").textContent = t.pie;
     }
 
     function verificarProducto() {
@@ -260,12 +297,8 @@
       }
     }
 
+    // Idioma por defecto
     setLanguage("es");
   </script>
-
-  <footer id="pie">
-    &copy; 2025 Terapy Pharma. Todos los derechos reservados.
-  </footer>
-
 </body>
 </html>
