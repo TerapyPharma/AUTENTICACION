@@ -28,25 +28,37 @@
       width: 100%;
       max-width: 800px;
       box-sizing: border-box;
+      position: relative;
     }
 
-    /* Encabezado superior: logo + banderas */
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .logo {
+    /* Logo centrado */
+    header img {
+      display: block;
+      margin: 0 auto 10px auto;
       width: 100px;
-      margin-bottom: 10px;
     }
 
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+      text-align: center;
+    }
+
+    header p {
+      font-size: 1.1em;
+      margin: 10px 0 0 0;
+      text-align: center;
+    }
+
+    /* Banderas en columna a la derecha */
     .language-switcher {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 15px;
     }
 
     .language-switcher button {
@@ -61,18 +73,6 @@
 
     .language-switcher button:hover {
       transform: scale(1.3);
-    }
-
-    header h1 {
-      font-size: 2.5em;
-      margin: 0 0 10px 0;
-      text-align: center;
-    }
-
-    header p {
-      font-size: 1.1em;
-      margin: 0;
-      text-align: center;
     }
 
     .verificador {
@@ -154,15 +154,17 @@
         padding: 20px 15px;
       }
 
-      .header-top {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-      }
-
       .language-switcher {
+        position: static;
+        transform: none;
+        flex-direction: row;
         justify-content: center;
         gap: 15px;
+        margin-bottom: 10px;
+      }
+
+      header img {
+        margin-bottom: 5px;
       }
 
       header h1 {
@@ -184,17 +186,16 @@
 <body>
 
   <header>
-    <div class="header-top">
-      <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma" class="logo" />
-      <div class="language-switcher">
-        <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
-        <button onclick="setLanguage('en')" aria-label="English">🇺🇸</button>
-        <button onclick="setLanguage('br')" aria-label="Português">🇧🇷</button>
-        <button onclick="setLanguage('de')" aria-label="Deutsch">🇩🇪</button>
-      </div>
-    </div>
+    <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma" />
     <h1>Terapy Pharma / Elit Pharma</h1>
     <p id="subtitulo">Verificación Oficial de Productos Auténticos</p>
+
+    <div class="language-switcher">
+      <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
+      <button onclick="setLanguage('en')" aria-label="English">🇺🇸</button>
+      <button onclick="setLanguage('br')" aria-label="Português">🇧🇷</button>
+      <button onclick="setLanguage('de')" aria-label="Deutsch">🇩🇪</button>
+    </div>
   </header>
 
   <div class="verificador">
