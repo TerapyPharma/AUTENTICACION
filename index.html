@@ -29,32 +29,41 @@
       max-width: 800px;
       box-sizing: border-box;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* Logo centrado */
     header img {
-      display: block;
-      margin: 0 auto 10px auto;
       width: 100px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* Contenedor para texto (h1 y p) */
+    .header-text {
+      text-align: center;
+      flex-grow: 1;
+      margin-left: 15px;
+      margin-right: 140px; /* espacio para las banderas */
     }
 
     header h1 {
       font-size: 2.5em;
       margin: 0;
-      text-align: center;
     }
 
     header p {
       font-size: 1.1em;
       margin: 10px 0 0 0;
-      text-align: center;
     }
 
     /* Banderas en columna a la derecha */
     .language-switcher {
       position: absolute;
-      top: 50%;
       right: 20px;
+      top: 50%;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
@@ -146,36 +155,34 @@
 
     /* Responsive para pantallas pequeñas */
     @media (max-width: 480px) {
-      body {
-        padding: 20px 10px;
-      }
-
       header {
-        padding: 20px 15px;
+        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 15px;
+        position: relative;
       }
-
+      .header-text {
+        margin: 15px 0 0 0;
+        margin-right: 0;
+      }
       .language-switcher {
         position: static;
         transform: none;
         flex-direction: row;
         justify-content: center;
-        gap: 15px;
-        margin-bottom: 10px;
+        gap: 20px;
+        margin-top: 15px;
       }
-
       header img {
-        margin-bottom: 5px;
+        margin: 0;
       }
-
       header h1 {
         font-size: 2em;
       }
-
       input, button {
         font-size: 14px;
         padding: 10px;
       }
-
       .verificador {
         padding: 20px;
         max-width: 100%;
@@ -187,8 +194,10 @@
 
   <header>
     <img src="logo.terapypharma.jpg" alt="Logo Terapy Pharma" />
-    <h1>Terapy Pharma / Elit Pharma</h1>
-    <p id="subtitulo">Verificación Oficial de Productos Auténticos</p>
+    <div class="header-text">
+      <h1>Terapy Pharma / Elit Pharma</h1>
+      <p id="subtitulo">Verificación Oficial de Productos Auténticos</p>
+    </div>
 
     <div class="language-switcher">
       <button onclick="setLanguage('es')" aria-label="Español">🇪🇸</button>
